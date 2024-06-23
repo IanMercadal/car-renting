@@ -96,7 +96,7 @@ class Car {
     
             $request = $connection->query($query);
             if (!$request) {
-                throw new Exception("Error creating car");
+                throw new Exception("Error updating car");
             }  
             
             return true;
@@ -116,7 +116,7 @@ class Car {
     
             $request = $connection->query($query);
             if (!$request) {
-                throw new Exception("Error creating car");
+                throw new Exception("Error deleting car");
             }  
     
             return true;
