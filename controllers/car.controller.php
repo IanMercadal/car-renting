@@ -45,9 +45,9 @@ class CarController {
         $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->update();
 
-        if($request["content"]) {
+        if($request) {
             $result["status"] = 200;
-            $result["content"] = $request["content"];
+            $result["content"] = "Car updated successfully";
         }
 
         return $result;

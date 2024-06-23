@@ -58,18 +58,24 @@ class Car {
     }
 
     public function update() {
-        $result = array("content" => []);     
+        $result = false;     
         
         $db = DB::getInstance();
         $connection = $db->getConnection();
 
-        $query = "SELECT * FROM cars";
+        $query = "UPDATE cars SET model = '".$this->model."',
+                    air_conditioner = '".$this->air_conditioner."',
+                    shift = ".$this->shift.",
+                    passengers = ".$this->passengers.",
+                    price = ".$this->price.",
+                    active = ".$this->active.",
+                    brand_id = ".$this->brand_id."
+                    where car_id = ".$this->car_id." ";
+
         $request = $connection->query($query);
 
         if ($request) {
-            while ($row = $request->fetch_assoc()) {
-                array_push($result["content"], $row);
-            }
+            $result = true;
         }
 
         return $result;
