@@ -5,7 +5,7 @@ class CarController {
     public function index($data) : array {
         $result = array("status" => 500,"content" => "Couldn't find cars");
 
-        $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
+        $car = new Car();
         $request = $car->index();
 
         if($request["content"]) {
@@ -19,7 +19,7 @@ class CarController {
     public function show($data) : array {
         $result = array("status" => 500,"content" => "Couldn't find car");
 
-        $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
+        $car = new Car($data["car_id"]);
         $request = $car->show();
 
         if($request["content"]) {
@@ -61,7 +61,7 @@ class CarController {
     public function delete($data) : array {
         $result = array("status" => 500,"content" => "Couldn't delete car");
 
-        $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
+        $car = new Car($data["car_id"]);
         $request = $car->delete();
 
         if($request) {
