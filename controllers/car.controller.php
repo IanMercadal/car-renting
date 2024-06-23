@@ -19,6 +19,23 @@ class CarController {
         return $result;
     }
 
+    public function show($data) : array {
+        $result = array(
+            "status" => 0,
+            "content" => ""
+        );
+
+        $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
+        $request = $car->show();
+
+        if($request["content"]) {
+            $result["status"] = 200;
+            $result["content"] = $request["content"];
+        }
+
+        return $result;
+    }
+
     public function create($data) : array {
         $result = array(
             "status" => 0,

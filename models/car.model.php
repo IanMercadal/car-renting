@@ -40,6 +40,25 @@ class Car {
         return $result;
     }
 
+    public function show() {
+        $result = array("content" => []);     
+        
+        $db = DB::getInstance();
+        $connection = $db->getConnection();
+
+        $query = "SELECT * FROM cars where car_id = " . $this->car_id;
+        $request = $connection->query($query);
+
+        if ($request) {
+            while ($row = $request->fetch_assoc()) {
+                array_push($result["content"], $row);
+            }
+        }
+
+        return $result;
+    }
+
+
     public function create() {
         $result = false;     
 
