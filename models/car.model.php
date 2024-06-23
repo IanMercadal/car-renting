@@ -82,18 +82,16 @@ class Car {
     }
 
     public function delete() {
-        $result = array("content" => []);     
+        $result = false;     
         
         $db = DB::getInstance();
         $connection = $db->getConnection();
 
-        $query = "SELECT * FROM cars";
+        $query = "DELETE FROM cars WHERE car_id = ".$this->car_id;
         $request = $connection->query($query);
 
         if ($request) {
-            while ($row = $request->fetch_assoc()) {
-                array_push($result["content"], $row);
-            }
+            $result = true;
         }
 
         return $result;
