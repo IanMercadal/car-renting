@@ -3,10 +3,7 @@
 class CarController {
     
     public function index($data) : array {
-        $result = array(
-            "status" => 0,
-            "content" => ""
-        );
+        $result = array("status" => 500,"content" => "Couldn't find cars");
 
         $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->index();
@@ -20,10 +17,7 @@ class CarController {
     }
 
     public function show($data) : array {
-        $result = array(
-            "status" => 0,
-            "content" => ""
-        );
+        $result = array("status" => 500,"content" => "Couldn't find car");
 
         $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->show();
@@ -37,10 +31,7 @@ class CarController {
     }
 
     public function create($data) : array {
-        $result = array(
-            "status" => 0,
-            "content" => ""
-        );
+        $result = array("status" => 500,"content" => "Couldn't create car");
 
         $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->create();
@@ -54,10 +45,7 @@ class CarController {
     }
 
     public function update($data) : array {
-        $result = array(
-            "status" => 0,
-            "content" => ""
-        );
+        $result = array("status" => 500,"content" => "Couldn't update car");
 
         $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->update();
@@ -71,10 +59,7 @@ class CarController {
     }
 
     public function delete($data) : array {
-        $result = array(
-            "status" => 0,
-            "content" => ""
-        );
+        $result = array("status" => 500,"content" => "Couldn't delete car");
 
         $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->delete();

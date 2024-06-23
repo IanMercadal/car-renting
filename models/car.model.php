@@ -59,61 +59,71 @@ class Car {
     }
 
 
-    public function create() {
-        $result = false;     
+    public function create() : bool {
+        try {
+            $db = DB::getInstance();
+            $connection = $db->getConnection();
+            $connection->begin_transaction();
 
-        $db = DB::getInstance();
-        $connection = $db->getConnection();
-
-        $query = "INSERT INTO cars (model,air_conditioner,shift,passengers,price,active,brand_id) 
-                    VALUES('".$this->model."',".$this->air_conditioner.",".$this->shift.",".$this->passengers.",".$this->price.",".$this->active.",".$this->brand_id.") ";
-        $request = $connection->query($query);
-
-        if ($request) {
-           $result = true;
-        }
-
-        return $result;
+            $query = "INSERT INTO cars (model,air_conditioner,shift,passengers,price,active,brand_id) 
+                        VALUES('".$this->model."',".$this->air_conditioner.",".$this->shift.",".$this->passengers.",".$this->price.",".$this->active.",".$this->brand_id.") ";
+            
+            $request = $connection->query($query);
+            if (!$request) {
+                throw new Exception("Error creating car");
+            }  
+            
+            return true;
+        } catch (Exception $e) {
+            $connection->rollback();
+            return false;
+        } 
     }
 
-    public function update() {
-        $result = false;     
-        
-        $db = DB::getInstance();
-        $connection = $db->getConnection();
-
-        $query = "UPDATE cars SET model = '".$this->model."',
-                    air_conditioner = '".$this->air_conditioner."',
-                    shift = ".$this->shift.",
-                    passengers = ".$this->passengers.",
-                    price = ".$this->price.",
-                    active = ".$this->active.",
-                    brand_id = ".$this->brand_id."
-                    where car_id = ".$this->car_id." ";
-
-        $request = $connection->query($query);
-
-        if ($request) {
-            $result = true;
+    public function update() : bool {
+        try {  
+            $db = DB::getInstance();
+            $connection = $db->getConnection();
+    
+            $query = "UPDATE cars SET model = '".$this->model."',
+                        air_conditioner = '".$this->air_conditioner."',
+                        shift = ".$this->shift.",
+                        passengers = ".$this->passengers.",
+                        price = ".$this->price.",
+                        active = ".$this->active.",
+                        brand_id = ".$this->brand_id."
+                        where car_id = ".$this->car_id." ";
+    
+            $request = $connection->query($query);
+            if (!$request) {
+                throw new Exception("Error creating car");
+            }  
+            
+            return true;
+        } catch (Exception $e) {
+            $connection->rollback();
+            return false;
         }
-
-        return $result;
     }
 
-    public function delete() {
-        $result = false;     
-        
-        $db = DB::getInstance();
-        $connection = $db->getConnection();
-
-        $query = "DELETE FROM cars WHERE car_id = ".$this->car_id;
-        $request = $connection->query($query);
-
-        if ($request) {
-            $result = true;
+    public function delete() : bool {
+        try {
+            $db = DB::getInstance();
+            $connection = $db->getConnection();
+    
+            $query = "DELETE FROM cars WHERE car_id = ".$this->car_id;
+            $request = $connection->query($query);
+    
+            $request = $connection->query($query);
+            if (!$request) {
+                throw new Exception("Error creating car");
+            }  
+    
+            return true;
+        } catch (Exception $e) {
+            $connection->rollback();
+            return false;
         }
-
-        return $result;
     }
 }
 
