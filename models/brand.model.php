@@ -62,6 +62,7 @@ class Brand {
                 throw new Exception("Error creating brand");
             }  
             
+            $connection->commit();
             return true;
         } catch (Exception $e) {
             $connection->rollback();

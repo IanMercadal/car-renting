@@ -73,6 +73,7 @@ class Car {
                 throw new Exception("Error creating car");
             }  
             
+            $connection->commit();
             return true;
         } catch (Exception $e) {
             $connection->rollback();
