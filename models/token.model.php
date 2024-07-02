@@ -22,13 +22,14 @@ class Token {
         $db = DB::getInstance();
         $connection = $db->getConnection();
 
-        // TODO: Añadir intervalo de 1 hora para el token
-        $query = "SELECT * FROM tokens where token = '$this->token' and user_id = '$this->user_id' and date = '$this->date' ";
+        $query = "SELECT * FROM tokens where token = '$this->token' and date = '$this->date' and hour BETWEEN '$this->hour' AND DATE_ADD('$this->hour', INTERVAL 1 HOUR); ";
         $request = $connection->query($query);
 
         if ($request) {
             $row = $request->fetch_assoc();
-            array_push($result["content"], $row);
+            if(!empty($row)) {
+                array_push($result["content"], $row);
+            }
         }
 
         return $result;
@@ -44,7 +45,6 @@ class Token {
             $query = "INSERT INTO tokens (token,date,hour,type,user_id) 
                         VALUES ('".$this->token."','".$this->date."','".$this->hour."','".$this->type."',".$this->user_id.") ";
             $request = $connection->query($query);
-            
 
             if (!$request) {
                 throw new Exception("Error creating brand");

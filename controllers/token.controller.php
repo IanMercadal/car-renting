@@ -3,9 +3,9 @@
 class TokenController {
     
     public function getToken($data) : array {
-        $result = array("status" => 500,"content" => "Couldn't find logs");
+        $result = array("status" => 500,"content" => "Couldn't find token");
 
-        $token = new Token($data["token"],NULL,NULL,NULL,$data["user_id"]);
+        $token = new Token($data["token"],$data["date"],$data["hour"],NULL,NULL);
         $request = $token->getToken();
 
         if($request["content"]) {
