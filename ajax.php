@@ -103,5 +103,15 @@ if($_POST['action'] == 'car') {
     returnResponse($response["status"], $response["content"]);
 }
 
+// CONTROL STRUCTURE FOR RESERVATION
+if($_POST['action'] == 'reservation') {
+    $reservation = new ReservationController();
+    $method = $_POST["method"];
+
+    $response = call_user_func_array([$reservation, $method], [$_POST]);
+
+    returnResponse($response["status"], $response["content"]);
+}
+
 
 ?>
