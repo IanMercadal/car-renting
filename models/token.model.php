@@ -22,13 +22,15 @@ class Token {
         $db = DB::getInstance();
         $connection = $db->getConnection();
 
-        $query = "SELECT * FROM tokens where token = '$this->token' and date = '$this->date' and hour BETWEEN '$this->hour' AND DATE_ADD('$this->hour', INTERVAL 1 HOUR); ";
+        $hour_before = getHourBefore($this->hour);
+
+        $query = "SELECT * FROM tokens where token = '$this->token' and date = '$this->date' and hour BETWEEN '$hour_before' and '$this->hour' ";
         $request = $connection->query($query);
 
         if ($request) {
             $row = $request->fetch_assoc();
             if(!empty($row)) {
-                array_push($result["content"], $row);
+                $result = $row["token"];
             }
         }
 
@@ -51,7 +53,7 @@ class Token {
             }  
             
             $connection->commit();
-            return true;
+            return $this->token;
         } catch (Exception $e) {
             $connection->rollback();
             return false;

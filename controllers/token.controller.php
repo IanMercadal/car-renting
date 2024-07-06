@@ -8,9 +8,9 @@ class TokenController {
         $token = new Token($data["token"],$data["date"],$data["hour"],NULL,NULL);
         $request = $token->getToken();
 
-        if($request["content"]) {
+        if($request) {
             $result["status"] = 200;
-            $result["content"] = $request["content"];
+            $result["content"] = $request;
         }
 
         return $result;
@@ -26,7 +26,7 @@ class TokenController {
 
         if($request) {
             $result["status"] = 200;
-            $result["content"] = "Token created successfully";
+            $result["content"] = $generated_token;
         }
 
         return $result;
