@@ -16,6 +16,22 @@ class User {
         $this->password = $password;
     }
 
+    public function login() {
+        $result = array("content" => []);     
+        
+        $db = DB::getInstance();
+        $connection = $db->getConnection();
+
+        $query = "SELECT * FROM users where email = '$this->email' ";
+        $request = $connection->query($query);
+
+        if ($request) {
+            $result["content"] = $request->fetch_assoc();
+        }
+
+        return $result;
+    }
+
     public function index() {
         $result = array("content" => []);     
         

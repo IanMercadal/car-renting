@@ -1,17 +1,15 @@
 <?php 
 
-function login() {
-    // TODO: CHECK USER AND PASSWORD
-
-    // TODO: CREATE TOKEN
-
+function hashPassword($password) {
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    return $hashed_password;
 }
 
-function register() {
-    // TODO: CHECK USER AND PASSWORD
-
-    // TODO: CREATE TOKEN
-    
+function hashCompare($password, $hashed_password) {
+    if(password_verify($password, $hashed_password)) {
+        return true;
+    }
+    return false;
 }
 
 function validateToken($incoming_token) {

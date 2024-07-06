@@ -1,6 +1,25 @@
 <?php 
 
 class UserController {
+
+    public function login($data) : array {
+        $result = array("status" => 500,"content" => "Email or password incorrect");
+
+        $user = new User(NULL,NULL,NULL,$data["email"], NULL);
+        $request = $user->login();
+
+        if($request["content"]) {
+            $hashed_password = $request["content"]["password"];
+            $verify_password = hashCompare($data["password"], $hashed_password);
+
+            if($verify_password) {
+                $result["status"] = 200;
+                $result["content"] = $request["content"];
+            }
+        }
+
+        return $result;
+    }
     
     public function index() : array {
         $result = array("status" => 500,"content" => "Couldn't find users");
@@ -33,7 +52,9 @@ class UserController {
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create user");
 
-        $user = new User(NULL,$data["name"],$data["surname"],$data["email"],$data["password"]);
+        $hashed_password = hashPassword($data["password"]);
+
+        $user = new User(NULL,$data["name"],$data["surname"],$data["email"],$hashed_password);
         $request = $user->create();
 
         if($request) {
