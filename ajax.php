@@ -83,4 +83,15 @@ if($_POST['action'] == 'user') {
     returnResponse($response["status"], $response["content"]);
 }
 
+// CONTROL STRUCTURE FOR USER
+if($_POST['action'] == 'brand') {
+    $brand = new BrandController();
+    $method = $_POST["method"];
+
+    $response = call_user_func_array([$brand, $method], [$_POST]);
+
+    returnResponse($response["status"], $response["content"]);
+}
+
+
 ?>
