@@ -8,4 +8,10 @@ function getHourBefore($actual_hour) {
     return $hour_before;
 }
 
+function returnResponse($status, $content) {
+    $response = array('status' => $status, 'content' => $content);
+    echo json_encode($response);
+    die();
+}
+
 ?>

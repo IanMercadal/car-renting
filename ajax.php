@@ -9,7 +9,6 @@
 // SET SPAIN HOUR
 date_default_timezone_set("Europe/Madrid");
 
-
 // USER
 require_once 'controllers/user.controller.php';
 require_once 'models/user.model.php';
@@ -45,9 +44,7 @@ require_once 'helpers.php';
 
 // CHECKING WANTED METHOD
 if(!isset($_POST['action']) || trim($_POST['action']) == "") {
-    $response = array("status" => 400,"content" => "Bad Request");
-    echo json_encode($response);
-    die();
+    returnResponse(400, "Bad Request");
 }
 
 // CONTROL STRUCTURE FOR USER
@@ -68,24 +65,17 @@ if($_POST['action'] == 'user') {
         $response = $user->create($_POST);
     }
 
-    echo json_encode($response);
-    die();
+    returnResponse($response["status"], $response["content"]);
 }
 
 // CHECK IF USER NEED LOGIN
 if(!isset($_POST['token'])) {
-    $response = array('status' => '403', 'content' => 'You are not allowed to access API, try to log in again');
-    echo json_encode($response);
-    die();
+    returnResponse(403, 'You are not allowed to access API, try to log in again');
 }
 
 $check_token = validateToken($_POST['token']);
 if(!$check_token) {
-    $response = array('status' => '403', 'content' => 'You are not allowed to access API, bad token, try to log in again');
-    echo json_encode($response);
-    die();
+    returnResponse(403, 'You are not allowed to access API, bad token, try to log in again');
 }
-
-echo json_encode($response);
 
 ?>
