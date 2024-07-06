@@ -2,8 +2,9 @@ CREATE TABLE `brands` (
   `brand_id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(16) NOT NULL,
   `active` int NOT NULL,
-  PRIMARY KEY (`brand_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+  PRIMARY KEY (`brand_id`),
+  UNIQUE KEY `unique_brand_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `cars` (
   `car_id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -14,8 +15,9 @@ CREATE TABLE `cars` (
   `price` int NOT NULL,
   `active` int NOT NULL,
   `brand_id` int NOT NULL,
-  PRIMARY KEY (`car_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+  PRIMARY KEY (`car_id`),
+  UNIQUE KEY `unique_brand_name` (`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `logs` (
   `log_id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -37,10 +39,12 @@ CREATE TABLE `reservations` (
 
 CREATE TABLE `tokens` (
   `token` varchar(32) NOT NULL,
-  `date_time` datetime NOT NULL,
+  `date` date NOT NULL,
+  `hour` varchar(5) NOT NULL,
   `type` varchar(12) NOT NULL,
   `user_id` int NOT NULL,
-  PRIMARY KEY (`token`)
+  PRIMARY KEY (`token`),
+  UNIQUE KEY `unique_token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `users` (
