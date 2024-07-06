@@ -83,12 +83,22 @@ if($_POST['action'] == 'user') {
     returnResponse($response["status"], $response["content"]);
 }
 
-// CONTROL STRUCTURE FOR USER
+// CONTROL STRUCTURE FOR BRAND
 if($_POST['action'] == 'brand') {
     $brand = new BrandController();
     $method = $_POST["method"];
 
     $response = call_user_func_array([$brand, $method], [$_POST]);
+
+    returnResponse($response["status"], $response["content"]);
+}
+
+// CONTROL STRUCTURE FOR CAR
+if($_POST['action'] == 'car') {
+    $car = new CarController();
+    $method = $_POST["method"];
+
+    $response = call_user_func_array([$car, $method], [$_POST]);
 
     returnResponse($response["status"], $response["content"]);
 }

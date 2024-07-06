@@ -33,7 +33,7 @@ class CarController {
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create car");
 
-        $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
+        $car = new Car(NULL, $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->create();
 
         if($request) {
