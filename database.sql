@@ -56,3 +56,10 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `unique_user_email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE USER 'customer_user'@'%' IDENTIFIED WITH mysql_native_password BY 'wY7oO6#D5d;C'; 
+GRANT SELECT ON `car_renting`.`brands` TO 'customer_user'@'%'; 
+GRANT SELECT ON `car_renting`.`cars` TO 'customer_user'@'%'; 
+GRANT INSERT, UPDATE ON `car_renting`.`reservations` TO 'customer_user'@'%'; 
+GRANT SELECT, INSERT ON `car_renting`.`tokens` TO 'customer_user'@'%'; 
+GRANT SELECT, INSERT, UPDATE ON `car_renting`.`users` TO 'customer_user'@'%'; 
