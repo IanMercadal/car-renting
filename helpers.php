@@ -14,4 +14,32 @@ function returnResponse($status, $content) {
     die();
 }
 
+function checkFieldValues($data) {
+    $clean_values = true;
+    foreach ($data as $key => $value) {
+        $sanitized_value = strtolower(trim(strip_tags($value)));
+
+        if($sanitized_value === "") {
+            $clean_values = false;
+        }
+
+        if($sanitized_value === NULL) {
+            $clean_values = false;
+        }
+
+        if($sanitized_value === false) {
+            $clean_values = false;
+        }
+
+        if (strpos($value, "drop") !== false) {
+            $clean_values = false;
+        }
+
+        if (strpos($value, "database") !== false) {
+            $clean_values = false;
+        }
+    }
+    return $clean_values;
+}
+
 ?>
