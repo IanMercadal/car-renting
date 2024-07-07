@@ -2,7 +2,7 @@
 
 class ReservationController {
     
-    public function index($data) : array {
+    public function index() : array {
         $result = array("status" => 500,"content" => "Couldn't find reservations");
 
         $reservation = new Reservation();
@@ -19,6 +19,11 @@ class ReservationController {
     public function show($data) : array {
         $result = array("status" => 500,"content" => "Couldn't find reservation");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $reservation = new Reservation($data["res_id"],NULL,NULL);
         $request = $reservation->show();
 
@@ -32,6 +37,11 @@ class ReservationController {
 
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create reservation");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $reservation = new Reservation($data["res_id"],$data["date_begin"],$data["date_end"],$data["total_amount"],$data["state"],$data["car_id"],$data["user_id"]);
         $request = $reservation->create();
@@ -47,6 +57,11 @@ class ReservationController {
     public function update($data) : array {
         $result = array("status" => 500,"content" => "Couldn't update reservation");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $reservation = new Reservation($data["res_id"],$data["date_begin"],$data["date_end"],$data["total_amount"],$data["state"],$data["car_id"],$data["user_id"]);
         $request = $reservation->update();
 
@@ -60,6 +75,11 @@ class ReservationController {
 
     public function delete($data) : array {
         $result = array("status" => 500,"content" => "Couldn't delete reservation");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $reservation = new Reservation($data["res_id"]);
         $request = $reservation->delete();

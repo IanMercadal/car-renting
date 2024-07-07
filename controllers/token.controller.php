@@ -19,6 +19,11 @@ class TokenController {
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create token");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $generated_token = bin2hex(random_bytes('16'));
 
         $token = new Token($generated_token,$data["date"],$data["hour"],$data["type"],$data["user_id"]);

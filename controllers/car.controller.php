@@ -2,7 +2,7 @@
 
 class CarController {
     
-    public function index($data) : array {
+    public function index() : array {
         $result = array("status" => 500,"content" => "Couldn't find cars");
 
         $car = new Car();
@@ -19,6 +19,11 @@ class CarController {
     public function show($data) : array {
         $result = array("status" => 500,"content" => "Couldn't find car");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $car = new Car($data["car_id"]);
         $request = $car->show();
 
@@ -32,6 +37,11 @@ class CarController {
 
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create car");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $car = new Car(NULL, $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->create();
@@ -47,6 +57,11 @@ class CarController {
     public function update($data) : array {
         $result = array("status" => 500,"content" => "Couldn't update car");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $car = new Car($data["car_id"], $data["model"], $data["air_conditioner"], $data["shift"],$data["passengers"],$data["price"],$data["active"],$data["brand_id"]);
         $request = $car->update();
 
@@ -60,6 +75,11 @@ class CarController {
 
     public function delete($data) : array {
         $result = array("status" => 500,"content" => "Couldn't delete car");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $car = new Car($data["car_id"]);
         $request = $car->delete();

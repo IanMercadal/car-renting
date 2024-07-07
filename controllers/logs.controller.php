@@ -2,7 +2,7 @@
 
 class LogController {
     
-    public function index($data) : array {
+    public function index() : array {
         $result = array("status" => 500,"content" => "Couldn't find logs");
 
         $log = new Log();
@@ -18,6 +18,11 @@ class LogController {
 
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create log");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $log = new Log(NULL, $data["action"], $data["user_id"]);
         $request = $log->create();

@@ -2,7 +2,7 @@
 
 class BrandController {
     
-    public function index($data) : array {
+    public function index() : array {
         $result = array("status" => 500,"content" => "Couldn't find brands");
 
         $brand = new Brand();
@@ -19,6 +19,11 @@ class BrandController {
     public function show($data) : array {
         $result = array("status" => 500,"content" => "Couldn't find brand");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+        
         $brand = new Brand($data["brand_id"],NULL,NULL);
         $request = $brand->show();
 
@@ -32,6 +37,11 @@ class BrandController {
 
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create brand");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $brand = new Brand(NULL,$data["name"],$data["active"]);
         $request = $brand->create();
@@ -47,6 +57,11 @@ class BrandController {
     public function update($data) : array {
         $result = array("status" => 500,"content" => "Couldn't update brand");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $brand = new Brand($data["brand_id"],$data["name"],$data["active"]);
         $request = $brand->update();
 
@@ -60,6 +75,11 @@ class BrandController {
 
     public function delete($data) : array {
         $result = array("status" => 500,"content" => "Couldn't delete brand");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $brand = new Brand($data["brand_id"]);
         $request = $brand->delete();

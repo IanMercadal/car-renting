@@ -38,6 +38,11 @@ class UserController {
     public function show($data) : array {
         $result = array("status" => 500,"content" => "Couldn't find user");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $user = new User($data["user_id"]);
         $request = $user->show();
 
@@ -51,6 +56,11 @@ class UserController {
 
     public function create($data) : array {
         $result = array("status" => 500,"content" => "Couldn't create user");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $hashed_password = hashPassword($data["password"]);
 
@@ -68,6 +78,11 @@ class UserController {
     public function update($data) : array {
         $result = array("status" => 500,"content" => "Couldn't update user");
 
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
+
         $user = new User($data["user_id"],$data["name"],$data["surname"],$data["email"],$data["password"]);
         $request = $user->update();
 
@@ -81,6 +96,11 @@ class UserController {
 
     public function delete($data) : array {
         $result = array("status" => 500,"content" => "Couldn't delete user");
+
+        $check_values = checkFieldValues($data);
+        if(!$check_values) {
+            return $result;
+        }
 
         $user = new User($data["user_id"]);
         $request = $user->delete();
