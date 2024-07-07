@@ -42,6 +42,9 @@ require_once 'auth.php';
 // HELPERS
 require_once 'helpers.php';
 
+// HELPERS
+require_once 'host.php';
+
 // CHECKING WANTED ACTION/METHOD
 $available_actions = array("brand", "car", "reservation", "user");
 $available_methods = array("index", "show", "create", "update" , "delete", "login", "register");

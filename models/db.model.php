@@ -3,10 +3,10 @@
 class DB {
     private static $instance = null;
     private $mysqli;
-    private $host = 'localhost';
-    private $db = 'car_renting';
-    private $user = 'root';
-    private $pass = '';
+    private $host = HOST;
+    private $db = DATABASE;
+    private $user = CUSTOMER_USER;
+    private $pass = CUSTOMER_USER_PASSWORD;
 
     private function __construct() {
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
